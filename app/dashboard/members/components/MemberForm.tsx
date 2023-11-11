@@ -17,14 +17,6 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 
-const FormSchema = z.object({
-	name: z.string().min(2, {
-		message: "Username must be at least 2 characters.",
-	}),
-	role: z.enum(["user", "admin"]),
-	status: z.enum(["active", "resigned"]),
-});
-
 import {
 	Select,
 	SelectContent,
@@ -32,10 +24,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { createMember, updateMemberById } from "../actions";
+import { CreateFormSchema, UpdateFormSchema } from "../schema";
 
-export default function MemberForm() {
+export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 	const roles = ["admin", "user"];
 	const status = ["active", "resigned"];
+
+	const FormSchema = isEdit ? UpdateFormSchema : CreateFormSchema;
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -43,10 +39,15 @@ export default function MemberForm() {
 			name: "",
 			role: "user",
 			status: "active",
+			email: "helo@gmail.com",
 		},
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
+	const handleCreateMember = (data: z.infer<typeof FormSchema>) => {
+		createMember();
+
+		document.getElementById("create-trigger")?.click();
+
 		toast({
 			title: "You submitted the following values:",
 			description: (
@@ -57,6 +58,30 @@ export default function MemberForm() {
 				</pre>
 			),
 		});
+	};
+
+	const handleUpdateMember = (data: z.infer<typeof FormSchema>) => {
+		updateMemberById("hello");
+		document.getElementById("update-trigger")?.click();
+
+		toast({
+			title: "You submitted the following values:",
+			description: (
+				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+					<code className="text-white">
+						{JSON.stringify(data, null, 2)}
+					</code>
+				</pre>
+			),
+		});
+	};
+
+	function onSubmit(data: z.infer<typeof FormSchema>) {
+		if (isEdit) {
+			handleUpdateMember(data);
+		} else {
+			handleCreateMember(data);
+		}
 	}
 
 	return (
@@ -67,12 +92,80 @@ export default function MemberForm() {
 			>
 				<FormField
 					control={form.control}
+					name="email"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Email</FormLabel>
+							<FormControl>
+								{isEdit ? (
+									<Input
+										readOnly
+										placeholder="email@gmail.com"
+										type="email"
+										{...field}
+									/>
+								) : (
+									<Input
+										placeholder="email@gmail.com"
+										type="email"
+										{...field}
+										onChange={field.onChange}
+									/>
+								)}
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="password"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								Password {isEdit && "(opional)"}
+							</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="******"
+									type="password"
+									onChange={field.onChange}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="confirm"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								Confirm Password {isEdit && "(opional)"}
+							</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="******"
+									type="password"
+									onChange={field.onChange}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
 					name="name"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Username</FormLabel>
 							<FormControl>
-								<Input placeholder="display name" {...field} />
+								<Input
+									placeholder="display name"
+									onChange={field.onChange}
+								/>
 							</FormControl>
 							<FormDescription>
 								This is your public display name.

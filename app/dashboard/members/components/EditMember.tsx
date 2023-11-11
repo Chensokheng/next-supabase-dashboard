@@ -2,6 +2,7 @@ import React from "react";
 import DailogForm from "./DialogForm";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
+import MemberForm from "./MemberForm";
 
 export default function EditMember() {
 	return (
@@ -14,6 +15,7 @@ export default function EditMember() {
 					Edit
 				</Button>
 			}
+			form={<MemberForm isEdit={true} />}
 		/>
 	);
 }

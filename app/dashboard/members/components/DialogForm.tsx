@@ -14,10 +14,12 @@ export default function DailogForm({
 	Trigger,
 	id,
 	title,
+	form,
 }: {
 	title: string;
 	Trigger: ReactNode;
 	id: string;
+	form: ReactNode;
 }) {
 	return (
 		<Dialog>
@@ -31,7 +33,7 @@ export default function DailogForm({
 						Make changes to your profile here. Click save when
 					</DialogDescription>
 				</DialogHeader>
-				<MemberForm />
+				{form}
 			</DialogContent>
 		</Dialog>
 	);

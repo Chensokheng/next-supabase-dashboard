@@ -27,6 +27,9 @@ export default function NavLinks() {
 				const Icon = link.Icon;
 				return (
 					<Link
+						onClick={() =>
+							document.getElementById("sidebar-close")?.click()
+						}
 						href={link.href}
 						key={index}
 						className={cn(

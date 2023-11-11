@@ -31,17 +31,17 @@ export default function ListOfMembers() {
 		},
 	];
 	return (
-		<>
+		<div className="dark:bg-inherit bg-white mx-2 rounded-sm">
 			{members.map((member, index) => {
 				return (
 					<div
-						className=" grid grid-cols-5  rounded-sm mx-2 p-3 align-middle"
+						className=" grid grid-cols-5  rounded-sm  p-3 align-middle "
 						key={index}
 					>
 						{Object.keys(member).map((key, index) => {
 							return (
 								<h1
-									className="flex items-center text-white text-lg"
+									className="flex items-center dark:text-white text-lg"
 									key={index}
 								>
 									{member[key as keyof typeof member]}
@@ -59,6 +59,6 @@ export default function ListOfMembers() {
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }

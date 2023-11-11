@@ -12,13 +12,25 @@ export default function ListOfTodo() {
 			created_at: new Date().toLocaleDateString(),
 			create_by: "sokheng",
 		},
+		{
+			title: "Subscribe to my channel",
+			status: "completed",
+			created_at: new Date().toLocaleDateString(),
+			create_by: "sokheng",
+		},
+		{
+			title: "Subscribe to my channel",
+			status: "completed",
+			created_at: new Date().toLocaleDateString(),
+			create_by: "sokheng",
+		},
 	];
 	return (
-		<>
+		<div className="dark:bg-inherit bg-white mx-2 rounded-sm">
 			{todos.map((todo, index) => {
 				return (
 					<div
-						className=" grid grid-cols-5  rounded-sm mx-2 p-3 align-middle"
+						className=" grid grid-cols-5  rounded-sm  p-3 align-middle "
 						key={index}
 					>
 						{Object.keys(todo).map((key, index) => {
@@ -36,7 +48,7 @@ export default function ListOfTodo() {
 							} else {
 								return (
 									<h1
-										className="flex items-center text-white text-lg"
+										className="flex items-center dark:text-white text-lg"
 										key={index}
 									>
 										{todo[key as keyof typeof todo]}
@@ -46,7 +58,10 @@ export default function ListOfTodo() {
 						})}
 
 						<div className="flex gap-2 items-center">
-							<Button variant="outline">
+							<Button
+								variant="outline"
+								className="bg-dark dark:bg-inherit"
+							>
 								<TrashIcon />
 								delete
 							</Button>
@@ -55,6 +70,6 @@ export default function ListOfTodo() {
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }

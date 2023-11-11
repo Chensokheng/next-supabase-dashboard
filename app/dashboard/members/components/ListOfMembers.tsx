@@ -1,10 +1,28 @@
 import React from "react";
-import { TrashIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import EditMember from "./EditMember";
 
 export default function ListOfMembers() {
 	const members = [
+		{
+			name: "Sokheng",
+			role: "Admin",
+			join: new Date().toLocaleDateString(),
+			status: "Active",
+		},
+		{
+			name: "Sokheng",
+			role: "Admin",
+			join: new Date().toLocaleDateString(),
+			status: "Active",
+		},
+		{
+			name: "Sokheng",
+			role: "Admin",
+			join: new Date().toLocaleDateString(),
+			status: "Active",
+		},
 		{
 			name: "Sokheng",
 			role: "Admin",

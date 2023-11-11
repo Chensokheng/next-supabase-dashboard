@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 		<div className="w-full flex">
 			<SideNav />
 			<MobileSideNav />
-			<div className="flex-1 p-10 space-y-5">
+			<div className="w-full sm:flex-1 p-5 sm:p-10 space-y-5">
 				<ToggleSidebar />
 				{children}
 			</div>

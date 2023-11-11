@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Karla({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://daily-todo.vercel.app/"),
+	metadataBase: new URL("https://daily-todo-task.vercel.app/"),
 
 	title: {
 		template: "%s | Daily Todo",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Daily Todo",
 		description: "Build dashboard with next.js and supabase ",
-		url: "https://daily-todo.vercel.app/",
+		url: "https://daily-todo-task.vercel.app/",
 		siteName: "Daily Todo",
 		images: "/og.png",
 		type: "website",

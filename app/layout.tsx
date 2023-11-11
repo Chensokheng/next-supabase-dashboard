@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Karla({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					<main className="">{children}</main>
+					<Toaster />
 				</ThemeProvider>
 			</body>
 		</html>

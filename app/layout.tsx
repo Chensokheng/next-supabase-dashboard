@@ -13,7 +13,9 @@ export const metadata: Metadata = {
 		template: "%s | Daily Todo",
 		default: "Daily Todo",
 	},
-
+	authors: {
+		name: "chensokheng",
+	},
 	description:
 		"Build dashboard with role managemanet using next.js and supabase.",
 	openGraph: {
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
 		images: "/og.png",
 		type: "website",
 	},
+	keywords: ["daily web coding", "chensokheng", "dailywebcoding"],
 };
 
 export default function RootLayout({

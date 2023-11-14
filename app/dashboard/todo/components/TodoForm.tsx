@@ -34,7 +34,7 @@ const FormSchema = z.object({
 	completed: z.boolean(),
 });
 
-export default function MemberTodo({ isEdit }: { isEdit: boolean }) {
+export default function TodoForm({ isEdit }: { isEdit: boolean }) {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {

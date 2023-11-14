@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Karla } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Karla({ subsets: ["latin"] });
+const jost = Jost({
+	subsets: ["latin"],
+	weight: ["100", "300", "400", "500", "700", "900"],
+});
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://daily-todo-task.vercel.app/"),
@@ -36,7 +39,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={`${inter.className} antialiased`}>
+			<body className={`${jost.className} antialiased dark:bg-[#09090B]`}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="dark"

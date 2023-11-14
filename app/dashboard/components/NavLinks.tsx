@@ -35,7 +35,8 @@ export default function NavLinks() {
 						className={cn(
 							"flex items-center gap-2 rounded-sm p-2",
 							{
-								"border  ring-2": pathname === link.href,
+								" bg-green-500 dark:bg-green-700 text-white ":
+									pathname === link.href,
 							}
 						)}
 					>

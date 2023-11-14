@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/select";
 import { createMember, updateMemberById } from "../actions";
 import { CreateFormSchema, UpdateFormSchema } from "../schema";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { cn } from "@/lib/utils";
 
 export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 	const roles = ["admin", "user"];
@@ -39,7 +41,7 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 			name: "",
 			role: "user",
 			status: "active",
-			email: "helo@gmail.com",
+			email: "",
 		},
 	});
 
@@ -244,8 +246,15 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" className="w-full" variant="outline">
-					Submit
+				<Button
+					type="submit"
+					className="w-full flex gap-2 items-center"
+					variant="outline"
+				>
+					Submit{" "}
+					<AiOutlineLoading3Quarters
+						className={cn("animate-spin", { hidden: true })}
+					/>
 				</Button>
 			</form>
 		</Form>

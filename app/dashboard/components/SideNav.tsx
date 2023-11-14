@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 import ModeToggle from "../todo/components/ToggleDarkMode";
 
 export default function SideNav() {
-	return <SideBar className=" hidden lg:block" />;
+	return <SideBar className=" hidden lg:block dark:bg-graident-dark" />;
 }
 
 export const SideBar = ({ className }: { className?: string }) => {
 	return (
 		<div
 			className={cn(
-				"flex-1 w-full lg:w-96 lg:p-10 space-y-5 lg:border-r ",
+				"flex-1 w-full lg:w-96 lg:p-10 space-y-5 lg:border-r  ",
 				className
 			)}
 		>

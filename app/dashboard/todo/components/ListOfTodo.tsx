@@ -3,25 +3,26 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import EditTodo from "./EditTodo";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export default function ListOfTodo() {
 	const todos = [
 		{
 			title: "Subscribe to my channel",
 			status: "completed",
-			created_at: new Date().toLocaleDateString(),
+			created_at: new Date().toDateString(),
 			create_by: "sokheng",
 		},
 		{
 			title: "Subscribe to my channel",
 			status: "completed",
-			created_at: new Date().toLocaleDateString(),
+			created_at: new Date().toDateString(),
 			create_by: "sokheng",
 		},
 		{
 			title: "Subscribe to my channel",
 			status: "completed",
-			created_at: new Date().toLocaleDateString(),
+			created_at: new Date().toDateString(),
 			create_by: "sokheng",
 		},
 	];
@@ -30,7 +31,7 @@ export default function ListOfTodo() {
 			{todos.map((todo, index) => {
 				return (
 					<div
-						className=" grid grid-cols-5  rounded-sm  p-3 align-middle "
+						className=" grid grid-cols-5  rounded-sm  p-3 align-middle font-normal "
 						key={index}
 					>
 						{Object.keys(todo).map((key, index) => {
@@ -40,9 +41,20 @@ export default function ListOfTodo() {
 										key={index}
 										className="flex items-center"
 									>
-										<Badge variant="complete">
-											{todo[key as keyof typeof todo]}
-										</Badge>
+										<div>
+											<span
+												className={cn(
+													"  dark:bg-zinc-800 px-2 py-1 rounded-full shadow capitalize  border-[.5px] text-sm",
+													{
+														"border-green-500 bg-green-400 dark:text-green-400":
+															todo.status ===
+															"completed",
+													}
+												)}
+											>
+												{todo.status}
+											</span>
+										</div>
 									</div>
 								);
 							} else {

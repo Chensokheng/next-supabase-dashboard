@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 
 import React, { ReactNode } from "react";
-import MemberForm from "./MemberForm";
 
 export default function DailogForm({
 	Trigger,
@@ -26,7 +25,7 @@ export default function DailogForm({
 			<DialogTrigger asChild id={id}>
 				{Trigger}
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="sm:max-w-[525px] dark:bg-graident-dark">
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 					<DialogDescription>

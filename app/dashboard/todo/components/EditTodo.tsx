@@ -2,7 +2,7 @@ import React from "react";
 import DailogForm from "./DialogForm";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
-import MemberForm from "./MemberTodo";
+import MemberForm from "./TodoForm";
 
 export default function EditTodo() {
 	return (

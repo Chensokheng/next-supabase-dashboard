@@ -18,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
+import { useTransition } from "react";
+import { loginWithEmailAndPassword } from "../actions";
+import { AuthTokenResponse } from "@supabase/supabase-js";
 
 const FormSchema = z.object({
 	email: z.string().email(),
@@ -25,6 +28,8 @@ const FormSchema = z.object({
 });
 
 export default function AuthForm() {
+	const [isPending, startTransition] = useTransition();
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -34,15 +39,25 @@ export default function AuthForm() {
 	});
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">
-						{JSON.stringify(data, null, 2)}
-					</code>
-				</pre>
-			),
+		startTransition(async () => {
+			const { error } = JSON.parse(
+				await loginWithEmailAndPassword(data)
+			) as AuthTokenResponse;
+
+			if (error) {
+				toast({
+					title: "Fail to login",
+					description: (
+						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+							<code className="text-white">{error.message}</code>
+						</pre>
+					),
+				});
+			} else {
+				toast({
+					title: "Successfully login 🎉",
+				});
+			}
 		});
 	}
 

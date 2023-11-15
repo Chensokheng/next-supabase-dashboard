@@ -2,8 +2,15 @@ import React, { ReactNode } from "react";
 import SideNav from "./components/SideNav";
 import ToggleSidebar from "./components/ToggleSidebar";
 import MobileSideNav from "./components/MobileSideNav";
+import { readUserSession } from "@/lib/actions";
+import { redirect } from "next/navigation";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default async function Layout({ children }: { children: ReactNode }) {
+	const { data: userSession } = await readUserSession();
+
+	if (!userSession.session) {
+		return redirect("/auth");
+	}
 	return (
 		<div className="w-full flex ">
 			<div className="h-screen flex flex-col">

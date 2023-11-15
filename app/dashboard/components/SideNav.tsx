@@ -4,6 +4,7 @@ import NavLinks from "./NavLinks";
 import { cn } from "@/lib/utils";
 import ModeToggle from "../todo/components/ToggleDarkMode";
 import { Button } from "@/components/ui/button";
+import SignOut from "./SignOut";
 
 export default function SideNav() {
 	return (
@@ -28,9 +29,7 @@ export const SideBar = ({ className }: { className?: string }) => {
 					<NavLinks />
 				</div>
 				<div className="">
-					<Button className="w-full" variant="outline">
-						SignOut
-					</Button>
+					<SignOut />
 				</div>
 			</div>
 		</div>

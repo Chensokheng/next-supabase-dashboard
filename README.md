@@ -1,4 +1,4 @@
-![Add a heading (12)](https://github.com/Chensokheng/next-supabase-dashboard/assets/52232579/4aaf8427-b4a7-45ff-a21a-d58400e57278)
+![Add a heading (13)](https://github.com/Chensokheng/next-supabase-dashboard/assets/52232579/8ffea2ac-0200-4bed-b87c-77d162d07b9e)
 
 
 ## Getting Started

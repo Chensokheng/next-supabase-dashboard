@@ -24,8 +24,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
@@ -34,3 +34,43 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+-   [ ] setup supbase fill env.sample
+-   [ ] create developer user
+-   [ ] handle user Login
+-   [ ] handle create user using service role
+-   [ ] Prevent UI from none admin
+-   [ ] update create user for only admin to create only
+-   [ ] read user
+-   [ ] update user
+-   [ ] delete user
+
+## Tables
+
+```sh
+permission_table:{
+    id: uuid,
+    role: text,
+    status: text, (active,resigned),
+    created_at: date,
+    member_id: uuid
+}
+```
+
+```sh
+member_table:{
+    id: uuid,
+    name: text,
+    created_at: date,
+}
+```
+
+```sh
+todo_table:{
+    id: uuid,
+    title: text,
+    completed: boolean,
+    created_at: date,
+    created_by: uuid (foreign_key member_id)
+}
+```

@@ -10,25 +10,25 @@ export default function ListOfMembers() {
 		{
 			name: "Sokheng",
 			role: "admin",
-			join: new Date().toDateString(),
+			created_at: new Date().toDateString(),
 			status: "active",
 		},
 		{
 			name: "Sokheng",
 			role: "user",
-			join: new Date().toDateString(),
+			created_at: new Date().toDateString(),
 			status: "active",
 		},
 		{
 			name: "Sokheng",
 			role: "admin",
-			join: new Date().toDateString(),
+			created_at: new Date().toDateString(),
 			status: "resigned",
 		},
 		{
 			name: "Sokheng",
 			role: "user",
-			join: new Date().toDateString(),
+			created_at: new Date().toDateString(),
 			status: "active",
 		},
 	];
@@ -57,7 +57,7 @@ export default function ListOfMembers() {
 								{member.role}
 							</span>
 						</div>
-						<h1>{member.join}</h1>
+						<h1>{member.created_at}</h1>
 						<div>
 							<span
 								className={cn(
@@ -77,7 +77,7 @@ export default function ListOfMembers() {
 						<div className="flex gap-2 items-center">
 							<Button variant="outline">
 								<TrashIcon />
-								delete
+								Delete
 							</Button>
 							<EditMember />
 						</div>

@@ -24,16 +24,33 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { createMember, updateMemberById } from "../actions";
-import { CreateFormSchema, UpdateFormSchema } from "../schema";
+import { createMember, updateMemberById } from "../../actions";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 
-export default function MemberForm({ isEdit }: { isEdit: boolean }) {
+const FormSchema = z
+	.object({
+		name: z.string().min(2, {
+			message: "Username must be at least 2 characters.",
+		}),
+		role: z.enum(["user", "admin"]),
+		status: z.enum(["active", "resigned"]),
+		email: z.string().email(),
+		password: z
+			.string()
+			.min(6, { message: "Password should be 6 characters" }),
+		confirm: z
+			.string()
+			.min(6, { message: "Password should be 6 characters" }),
+	})
+	.refine((data) => data.confirm === data.password, {
+		message: "Passowrd doesn't match",
+		path: ["confirm"],
+	});
+
+export default function MemberForm() {
 	const roles = ["admin", "user"];
 	const status = ["active", "resigned"];
-
-	const FormSchema = isEdit ? UpdateFormSchema : CreateFormSchema;
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -45,7 +62,7 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 		},
 	});
 
-	const handleCreateMember = (data: z.infer<typeof FormSchema>) => {
+	function onSubmit(data: z.infer<typeof FormSchema>) {
 		createMember();
 
 		document.getElementById("create-trigger")?.click();
@@ -60,30 +77,6 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 				</pre>
 			),
 		});
-	};
-
-	const handleUpdateMember = (data: z.infer<typeof FormSchema>) => {
-		updateMemberById("hello");
-		document.getElementById("update-trigger")?.click();
-
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">
-						{JSON.stringify(data, null, 2)}
-					</code>
-				</pre>
-			),
-		});
-	};
-
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		if (isEdit) {
-			handleUpdateMember(data);
-		} else {
-			handleCreateMember(data);
-		}
 	}
 
 	return (
@@ -99,21 +92,12 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 						<FormItem>
 							<FormLabel>Email</FormLabel>
 							<FormControl>
-								{isEdit ? (
-									<Input
-										readOnly
-										placeholder="email@gmail.com"
-										type="email"
-										{...field}
-									/>
-								) : (
-									<Input
-										placeholder="email@gmail.com"
-										type="email"
-										{...field}
-										onChange={field.onChange}
-									/>
-								)}
+								<Input
+									placeholder="email@gmail.com"
+									type="email"
+									{...field}
+									onChange={field.onChange}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -124,9 +108,7 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>
-								Password {isEdit && "(opional)"}
-							</FormLabel>
+							<FormLabel>Password</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="******"
@@ -143,9 +125,7 @@ export default function MemberForm({ isEdit }: { isEdit: boolean }) {
 					name="confirm"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>
-								Confirm Password {isEdit && "(opional)"}
-							</FormLabel>
+							<FormLabel>Confirm Password</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="******"

@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { cn } from "@/lib/utils";
 
 const FormSchema = z.object({
 	email: z.string().email(),
@@ -87,8 +89,17 @@ export default function AuthForm() {
 							</FormItem>
 						)}
 					/>
-					<Button type="submit" variant="outline" className="w-full">
-						Login
+					<Button
+						type="submit"
+						variant="outline"
+						className="w-full flex items-center gap-2"
+					>
+						Login{" "}
+						<AiOutlineLoading3Quarters
+							className={cn("animate-spin", {
+								hidden: true,
+							})}
+						/>
 					</Button>
 				</form>
 			</Form>

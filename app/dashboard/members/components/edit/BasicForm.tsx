@@ -17,6 +17,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
+import { IPermission } from "@/lib/types";
+import { updateMemberBasicById } from "../../actions";
+import { useTransition } from "react";
 
 const FormSchema = z.object({
 	name: z.string().min(2, {
@@ -24,24 +27,35 @@ const FormSchema = z.object({
 	}),
 });
 
-export default function BasicForm() {
+export default function BasicForm({ permission }: { permission: IPermission }) {
+	const [isPending, startTransition] = useTransition();
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			name: "",
+			name: permission.member.name,
 		},
 	});
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">
-						{JSON.stringify(data, null, 2)}
-					</code>
-				</pre>
-			),
+		startTransition(async () => {
+			const { error } = JSON.parse(
+				await updateMemberBasicById(permission.member_id, data)
+			);
+			if (error?.message) {
+				toast({
+					title: "Fail to update",
+					description: (
+						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+							<code className="text-white">error?.message</code>
+						</pre>
+					),
+				});
+			} else {
+				toast({
+					title: "successfully update",
+				});
+			}
 		});
 	}
 

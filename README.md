@@ -35,9 +35,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
--   [ ] setup supbase fill env.sample
--   [ ] create developer user
--   [ ] handle user Login
+-   [x] setup supbase fill env.sample
+-   [x] create developer user
+
 -   [ ] handle create user using service role
 -   [ ] Prevent UI from none admin
 -   [ ] update create user for only admin to create only
